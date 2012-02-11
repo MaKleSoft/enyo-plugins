@@ -1,0 +1,67 @@
+﻿.maklesoft-table {
+    background-color: White;
+}
+
+.maklesoft-table .cell {
+    border: solid 1px;
+}
+
+/*
+Selected cell
+*/
+.maklesoft-table .cell.selected {
+    background-color: Orange;
+}
+
+.maklesoft-table .cell input {
+    background-color: Transparent;
+    border: none;
+}
+
+/*
+Cell with a number in it
+*/
+.maklesoft-table .cell .number input {
+    text-align: right;
+}
+
+/*
+row numbers
+*/
+.maklesoft-table .rownumber {
+    background-color: Gray;
+    text-align: center;
+    width: 40px;
+    border-bottom: solid 1px;
+}
+
+/*
+column names
+*/
+.maklesoft-table .colname {
+    background-color: Gray;
+    text-align: center;
+    border-left: solid 1px;
+    border-right: solid 1px;
+}
+
+/*
+Row with an odd row number
+*/
+.maklesoft-table .row.odd {
+    background-color: #eee;
+}
+
+/*
+Selected row
+*/
+.maklesoft-table .row.selected {
+    background-color: Orange;
+}
+
+/*
+Startpoint for range selection
+*/
+.maklesoft-table .row.rangeselection {
+    background-color: Lime;
+}

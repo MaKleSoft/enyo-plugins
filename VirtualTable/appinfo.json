@@ -1,0 +1,8 @@
+{
+	"id": "com.maklesoft.examples.virtualtableexample",
+	"version": "1.0.0",
+	"vendor": "MaKleSoft",
+	"type": "web",
+	"main": "index.html",
+	"title": "VirtualTable example"
+}
