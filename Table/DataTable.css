@@ -1,0 +1,66 @@
+.maklesoft-datatable {
+}
+
+.maklesoft-datatable .maklesoft-datatable-cell {
+    border: solid 1px;
+}
+
+.maklesoft-datatable td {
+    padding: 0px;
+    margin: 0px;
+}
+
+/*
+Selected cell
+*/
+.maklesoft-datatable .maklesoft-datatable-cell.maklesoft-datatable-selected {
+    background-color: Orange;
+}
+
+.maklesoft-datatable .maklesoft-datatable-cell input {
+    background-color: Transparent;
+    border: none;
+}
+
+/*
+Cell with a number in it
+*/
+.maklesoft-datatable .maklesoft-datatable-cell .maklesoft-datatable-number input {
+    text-align: right;
+}
+
+/*
+row numbers
+*/
+.maklesoft-datatable .maklesoft-datatable-rownumber {
+    text-align: center;
+    width: 40px;
+}
+
+/*
+column names
+*/
+.maklesoft-datatable .maklesoft-datatable-colname {
+    text-align: center;
+}
+
+/*
+Row with an odd row number
+*/
+.maklesoft-datatable .maklesoft-datatable-odd {
+    background-color: Gray;
+}
+
+/*
+Selected row
+*/
+.maklesoft-datatable .maklesoft-datatable-selected .maklesoft-datatable-cell {
+    background-color: Orange;
+}
+
+/*
+Startpoint for range selection
+*/
+.maklesoft-datatable .maklesoft-datatable-rangeselection {
+    background-color: Lime;
+}
