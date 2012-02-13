@@ -3,6 +3,7 @@
 
 .maklesoft-datatable .maklesoft-datatable-cell {
     border: solid 1px;
+    min-width: 70px;
 }
 
 .maklesoft-datatable td {
@@ -48,7 +49,7 @@ column names
 Row with an odd row number
 */
 .maklesoft-datatable .maklesoft-datatable-odd {
-    background-color: Gray;
+    background-color: #eee;
 }
 
 /*
@@ -61,6 +62,6 @@ Selected row
 /*
 Startpoint for range selection
 */
-.maklesoft-datatable .maklesoft-datatable-rangeselection {
+.maklesoft-datatable .maklesoft-datatable-rangeselection .maklesoft-datatable-cell {
     background-color: Lime;
 }

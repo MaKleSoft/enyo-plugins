@@ -1,13 +1,19 @@
+/*
+@author Martin Kleinschrodt
+Copyright (c) by MaKleSoft
+This code is provided "as is", without any kind of warranty.
+http://www.maklesoft.com
+*/
 enyo.kind({
     name: "DataTableExample",
     kind: "VFlexBox",
     components: [{
         kind: "Header",
-        components: [{content: "ScrollingVirtualTable example <br> <span style='color:gray; font-size: 12pt'>Brought to you by MaKleSoft</span>", flex: 1},
+        components: [{content: "DataTable example - <a href='https://github.com/MaKleSoft/enyo-plugins/tree/master/Table'>Get the code on Github</a><br> <span style='color:gray; font-size: 12pt'>Brought to you by MaKleSoft</span>", flex: 1},
         {kind: "Button", caption: "load data", onclick: "loadData"}]
     },{
         kind: "HFlexBox", flex: 1, components: [{
-            kind: "Scroller", flex: 1, components: [{
+            kind: "BasicScroller", horizontal: true, autoHorizontal: false, flex: 1, components: [{
                 kind: "maklesoft.DataTable",
                 name: "table",
                 rowCount: 50,

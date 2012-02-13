@@ -4,6 +4,63 @@ Copyright (c) by MaKleSoft
 This code is provided "as is", without any kind of warranty.
 http://www.maklesoft.com
 */
+/**
+    A control that is designed to display and/or collect tabular data. This implementation uses the maklesoft.Table kind for displaying the data. Aside from editing cells and deleting and adding rows and columns
+    this control also supports various selection modes and dynamical styling of individual cells
+    based on indizes and values.
+    
+    ## properties
+        * rowCount: The number of rows the table should have. If no row count is specified the length of the data
+            array is used
+            Default 0
+        * colCount: The number of columns the table should have. If no column count is specified the maximum
+            column length of the data array is used
+            Default 0
+        * editable: A boolean that specifies whether or not the cells should be editable. If true, row and column
+            selection requires a double tap instead of a single tap
+            Default false
+        * data: A two dimensional array containing the data to be displayed. Omit this property to get a blank table
+            but dont forget to set the row and column count and make the table editable!
+            Default [[]]
+        * selectionMode: Determines the selection behaviour of the table. There are five different selection modes:
+            * maklesoft.DataTable.SelectionModes.SINGLE_ROW: One row can be selected at a time
+            * maklesoft.DataTable.SelectionModes.MULTI_ROW: Multiple rows can be selected at a time
+            * maklesoft.DataTable.SelectionModes.SINGLE_COLUMN: One column can be selected at a time
+            * maklesoft.DataTable.SelectionModes.MULTI_COLUMN: Multiple columns can be selected at a time
+            * maklesoft.DataTable.SelectionModes.NONE: No selection possible
+            Default: maklesoft.DataTable.SelectionModes.NONE
+        * showRowNumbers: Whether or not to display the row numbers
+            Default: true
+        * showColumnNames: Whether or not to use column names
+            Default: false
+        * columnNames: An array specifying the column names to be used. If this property is omitted the columns will
+            be labeled alphabetically
+        * cellClass: This can either be a string, specifying a generic class name for all cells or a function that returns a class name depending on the row index, column index and data of the cell. For more information, see 'Dynamic styling'.
+        
+    ## Selection
+        The VirtualTable kind supports various selection modes for selecting single or multiple rows or columns.
+        If the table is not editable the user can select a row/column by tapping/clicking on it. If the table is
+        editable a double click/tab is required.
+        Range selection is possible by tapping/clicking a row and holding it and then tapping/clicking on another row
+        in order to select all rows between both. Range selection is only possible in the MULTI_ROW mode.
+        
+    ## Adding and deleting rows columns
+        Rows and columns can be added or deleted at a given index or based on user selection. For more information inspect the
+        documentation of the respective methods.
+        
+    ## Data manipulation
+        The tables data can be manipulated programmatically or through user input. Once the editing is done the data can be
+        conveniently received using getData()
+        
+    ## Dynamic styling
+        Custom functions can be provided for the cellClass property in order to dynamically style cells. This function should
+        take the column and row index and the value of the cell and decide which css class to apply to the cell. For example the default
+        cellClass function returns the class name "number" if the value in the cell is a number:
+            function(colIndex, rowIndex, data) {
+                if (typeof(data) == "number")
+                return "number";
+            }
+ */
 enyo.kind({
     name: "maklesoft.DataTable",
     kind: "Control",
@@ -87,7 +144,7 @@ enyo.kind({
 
             var className = typeof this.cellClass == "function" ? this.cellClass(rowIndex, colIndex, data) : this.cellClass;
             var cellConfig = {
-                kind: "HFlexBox", name: "cell_" + rowIndex + "_" + colIndex, onclick: "cellClick", ondblclick: "cellDblclick", onmouseheld: "cellMouseheld", className: className, components: [{kind: "BasicInput", value: data, disabled: !this.editable, rowIndex: rowIndex, colIndex: colIndex, name: "input_" + rowIndex + "_" + colIndex, flex: 1, style: "width: 100%; padding: 0px 10px 0px 10px", hint: "", onchange: "inputChanged"}]
+                kind: "HFlexBox", name: "cell_" + rowIndex + "_" + colIndex, onclick: "cellClick", ondblclick: "cellDblclick", onmousehold: "cellMouseheld", className: className, components: [{kind: "BasicInput", value: data, disabled: !this.editable, rowIndex: rowIndex, colIndex: colIndex, name: "input_" + rowIndex + "_" + colIndex, flex: 1, style: "width: 100%; padding: 0px 10px 0px 10px", hint: "", onchange: "inputChanged"}]
             };
 
             if (((this.selectionMode == maklesoft.DataTable.SelectionMode.SINGLE_COLUMN || this.selectionMode == maklesoft.DataTable.SelectionMode.MULTI_COLUMN) && this.$.selection.isSelected(colIndex)) ||
@@ -110,15 +167,15 @@ enyo.kind({
         //if the range selection has allready been triggered with another startindex
         if (this.rangeSelectionStartIndex) {
             //remove the marker from the old start index row+
-            this.$.table.getRow(this.rangeSelectionStartIndex).removeClass("maklesoft-datatable-rangeselection");
+            this.$.table.fetchRow(this.rangeSelectionStartIndex).removeClass("maklesoft-datatable-rangeselection");
         }
         //Highlight the row at the start index
-        this.$.table.getRow(startindex).addClass("maklesoft-datatable-rangeselection");
+        this.$.table.fetchRow(startIndex).addClass("maklesoft-datatable-rangeselection");
         this.rangeSelectionStartIndex = startIndex;
     },
     endRangeSelection: function(endIndex) {
         var startIndex = this.rangeSelectionStartIndex;
-        this.$.table.getRow(startIndex).removeClass("maklesoft-datatable-rangeselection");
+        this.$.table.fetchRow(startIndex).removeClass("maklesoft-datatable-rangeselection");
         for (var i = Math.min(startIndex, endIndex); i <= Math.max(startIndex, endIndex); i++) {
             this.$.selection.select(i);
         }
@@ -127,12 +184,13 @@ enyo.kind({
     },
     selectRow: function(index) {
         this.$.selection.select(index);
+        var rowOffset = this.showColumnNames ? 1 : 0;
         //this.$.list.refresh();
         //Directly change the selected rows styling instead of refreshing for better performance
-        this.$.table.getRow(index).addRemoveClass("maklesoft-datatable-selected", this.$.selection.isSelected(index));
+        this.$.table.fetchRow(index + rowOffset).addRemoveClass("maklesoft-datatable-selected", this.$.selection.isSelected(index));
         //But then we have to make sure that the last selected rows styling is also changed when in SINGLE_ROW selection mode
         if (this.selectionMode == maklesoft.DataTable.SelectionMode.SINGLE_ROW && (this.lastSelected !== undefined)) {
-            this.$.table.getRow(this.lastSelected).removeClass("maklesoft-datatable-selected");
+            this.$.table.fetchRow(this.lastSelected + rowOffset).removeClass("maklesoft-datatable-selected");
         }
         this.lastSelected = index;
     },
