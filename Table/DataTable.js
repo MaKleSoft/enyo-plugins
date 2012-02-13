@@ -164,13 +164,14 @@ enyo.kind({
         }
     },
     startRangeSelection: function(startIndex) {
+        var rowOffset = this.showColumnNames ? 1 : 0;
         //if the range selection has allready been triggered with another startindex
         if (this.rangeSelectionStartIndex) {
             //remove the marker from the old start index row+
-            this.$.table.fetchRow(this.rangeSelectionStartIndex).removeClass("maklesoft-datatable-rangeselection");
+            this.$.table.fetchRow(this.rangeSelectionStartIndex + rowOffset).removeClass("maklesoft-datatable-rangeselection");
         }
         //Highlight the row at the start index
-        this.$.table.fetchRow(startIndex).addClass("maklesoft-datatable-rangeselection");
+        this.$.table.fetchRow(startIndex + rowOffset).addClass("maklesoft-datatable-rangeselection");
         this.rangeSelectionStartIndex = startIndex;
     },
     endRangeSelection: function(endIndex) {
