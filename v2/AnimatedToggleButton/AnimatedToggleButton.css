@@ -1,4 +1,5 @@
 .onyx-toggle-button.onyx-animated-toggle-button {
+	/* We need this so that the knob is positioned relatively to the toggle button */
 	position: relative;
 }
 

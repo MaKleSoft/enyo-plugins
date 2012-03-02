@@ -1,18 +1,5 @@
 /**
-A control that looks like a switch with labels for two states. Each time a ToggleButton is tapped,
-it switches its value and fires an onChange event.
-
-	{kind: "onyx.ToggleButton", onContent: "foo", offContent: "bar", onChange: "buttonToggle"}
-
-	buttonToggle: function(inSender, inEvent) {
-		this.log("Toggled to value " + inEvent.value);
-	}
-
-To find out the value of the button, use getValue:
-
-	queryToggleValue: function() {
-		return this.$.toggleButton.getValue();
-	}
+An extension fo the ToggleButton kind that animates between the on and off position and allows actual dragging of the knob.
 */
 enyo.kind({
 	name: "onyx.AnimatedToggleButton",
@@ -34,10 +21,6 @@ enyo.kind({
 		}
 
 	},
-	activeChanged: function() {
-		this.setValue(this.active);
-		this.bubble("onActivate");
-	},
 	onContentChanged: function() {
 		this.inherited(arguments);
 		this.calculateSlidingBounds();
@@ -54,11 +37,14 @@ enyo.kind({
 	},
 	rendered: function() {
 		this.inherited(arguments);
+		// Do this after the Control has been rendered so that the sliding bounds can be calculated properly
 		this.valueChanged();
 	},
+	// Calculate the maximum sliding position for the knob
 	calculateSlidingBounds: function() {
 		this.$.knob.setMax(this.getBounds().width-this.$.knob.getBounds().width-2);
 	},
+	// Prevent the drag handling of the super kind
 	dragstart: function(inSender, inEvent) {
 	},
 	drag: function(inSender, inEvent) {
