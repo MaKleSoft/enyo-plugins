@@ -9,6 +9,7 @@
 .maklesoft-datatable td {
     padding: 0px;
     margin: 0px;
+    max-width: none;
 }
 
 /*

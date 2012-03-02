@@ -16,8 +16,8 @@ enyo.kind({
             kind: "BasicScroller", horizontal: true, autoHorizontal: false, flex: 1, components: [{
                 kind: "maklesoft.DataTable",
                 name: "table",
-                rowCount: 50,
-                colCount: 7,
+                rowCount: 500,
+                colCount: 10,
                 selectionMode: maklesoft.DataTable.SelectionMode.MULTI_ROW,
                 editable: true
             }]

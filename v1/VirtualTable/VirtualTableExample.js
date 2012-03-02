@@ -10,8 +10,8 @@ enyo.kind({
         kind: "BasicScroller", flex: 1, autoHorizontal: true, components: [{
             kind: "maklesoft.VirtualTable",
             name: "table",
-            rowCount: 50,
-            colCount: 15,
+            rowCount: 500,
+            colCount: 10,
             selectionMode: "MULTI_ROW",
             editable: false,
             style: "width: 1800px"
