@@ -1,4 +1,4 @@
-This code is completely dependent on Enyo 1.0, hosted on GitHub ( github.com/enyojs/enyo-1.0 )
+This code depends on the open source Javascript application framework Enyo, hosted on GitHub ( github.com/enyojs )
 
 Copyright (c) 2012 Martin Kleinschrodt
 
