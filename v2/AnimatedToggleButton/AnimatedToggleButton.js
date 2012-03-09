@@ -2,7 +2,7 @@
 An extension fo the ToggleButton kind that animates between the on and off position and allows actual dragging of the knob.
 */
 enyo.kind({
-	name: "onyx.AnimatedToggleButton",
+	name: "onyx.custom.AnimatedToggleButton",
 	kind: "onyx.ToggleButton",
 	classes: "onyx-animated-toggle-button",
 	components: [
