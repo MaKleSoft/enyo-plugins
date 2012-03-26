@@ -1,0 +1,33 @@
+.select-decorator {
+	position: relative;
+	padding: 0px;
+	min-height: 30px;
+}
+
+.select-decorator select {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	display: inline;
+	-webkit-appearance: none;
+	opacity: 0;
+}
+
+.select-decorator .select-decorator-inner {
+	padding: 8px 10px;
+}
+
+.select-decorator-inner-text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: left;
+}
+
+.select-decorator-inner-arrow {
+	width: 21px;
+	height: 21px;
+	background: url(menu-arrow.png) no-repeat center center;
+}
