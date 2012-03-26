@@ -6,11 +6,18 @@ enyo.kind({
 	},
 	rendered: function() {
 		this.inherited(arguments);
-		this.changedHandler(this.getComponents()[3]);
+		var selectNode = this.hasNode().childNodes[1];
+		this.log(selectNode);
+		if (selectNode.childNodes.length) {
+			var caption = selectNode.childNodes[selectNode.selectedIndex].innerHTML;
+			this.$.innerText.setContent(caption);
+		}
 	},
 	changedHandler: function(sender, event) {
-		var caption = sender.hasNode().childNodes[sender.getSelected()].innerHTML;
-		this.$.innerText.setContent(caption);
+		if (sender) {
+			var caption = sender.hasNode().childNodes[sender.getSelected()].innerHTML;
+			this.$.innerText.setContent(caption);
+		}
 	},
 	components: [
 		{kind: "FittableColumns", noStretch: true, classes: "select-decorator-inner", components: [
