@@ -7,7 +7,6 @@ enyo.kind({
 	rendered: function() {
 		this.inherited(arguments);
 		var selectNode = this.hasNode().childNodes[1];
-		this.log(selectNode);
 		if (selectNode.childNodes.length) {
 			var caption = selectNode.childNodes[selectNode.selectedIndex].innerHTML;
 			this.$.innerText.setContent(caption);
