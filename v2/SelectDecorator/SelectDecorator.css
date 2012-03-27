@@ -15,6 +15,14 @@
 	opacity: 0;
 }
 
+.select-decorator.select-decorator-disabled {
+	opacity: 0.4;
+}
+
+.select-decorator.select-decorator-disabled select {
+	visibility: hidden;
+}
+
 .select-decorator .select-decorator-inner {
 	padding: 8px 10px;
 }

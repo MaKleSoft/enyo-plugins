@@ -1,22 +1,30 @@
 enyo.kind({
-	name: "onyx.custom.SelectDecorator",
+	name: "SelectDecorator",
 	classes: "onyx-button select-decorator",
 	handlers: {
-		onchange: "changedHandler"
+		onchange: "changeHandler"
+	},
+	published: {
+		disabled: false
+	},
+	disabledChanged: function() {
+		this.addRemoveClass("select-decorator-disabled", this.disabled);
+	},
+	create: function() {
+		this.inherited(arguments);
+		this.disabledChanged();
 	},
 	rendered: function() {
 		this.inherited(arguments);
-		var selectNode = this.hasNode().childNodes[1];
-		if (selectNode.childNodes.length) {
-			var caption = selectNode.childNodes[selectNode.selectedIndex].innerHTML;
-			this.$.innerText.setContent(caption);
+		var select = this.getClientControls()[0];
+
+		if (select) {
+			this.changeHandler(select);
 		}
 	},
-	changedHandler: function(sender, event) {
-		if (sender) {
-			var caption = sender.hasNode().childNodes[sender.getSelected()].innerHTML;
-			this.$.innerText.setContent(caption);
-		}
+	changeHandler: function(sender, event) {
+		var caption = sender.getControls()[sender.getSelected()].getContent();
+		this.$.innerText.setContent(caption);
 	},
 	components: [
 		{kind: "FittableColumns", noStretch: true, classes: "select-decorator-inner", components: [
