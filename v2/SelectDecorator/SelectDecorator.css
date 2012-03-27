@@ -41,12 +41,11 @@
 
 .select-decorator-inner-icon {
 	float: left;
-	margin-left: 10px;
 	width: 32px;
 	height: 32px;
 	background-size: cover;
 	margin: -7px 7px -7px 0;
-	background-position: 0 0;
+	background-position: 0px 0px;
 }
 
 .onyx-button.active .select-decorator-inner-icon,
@@ -55,8 +54,7 @@
 }
 
 .select-decorator-no-caption .select-decorator-inner-icon {
-	
-	background-position: 0 -32px;
+	margin-right: 0;
 }
 
 .select-decorator-inner-arrow {
