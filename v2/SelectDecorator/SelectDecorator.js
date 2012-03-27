@@ -1,35 +1,61 @@
 enyo.kind({
-	name: "SelectDecorator",
-	classes: "onyx-button select-decorator",
-	handlers: {
-		onchange: "changeHandler"
+	name : "SelectDecorator",
+	classes : "onyx-button select-decorator",
+	handlers : {
+		onchange : "changeHandler"
 	},
-	published: {
-		disabled: false
+	published : {
+		disabled : false,
+		showCaption : true,
+		showArrow : true,
+		icon : ""
 	},
-	disabledChanged: function() {
+	showCaptionChanged: function() {
+		this.$.innerText.setShowing(this.showCaption);
+		this.addRemoveClass("select-decorator-no-caption", !this.showCaption);
+	},
+	disabledChanged : function() {
 		this.addRemoveClass("select-decorator-disabled", this.disabled);
 	},
-	create: function() {
+	showArrowChanged : function() {
+		this.addRemoveClass("select-decorator-no-arrow", !this.showArrow);
+	},
+	iconChanged : function() {
+		this.$.innerIcon.setStyle("background-image: url('" + this.icon + "')");
+		this.$.innerIcon.setShowing((this.icon !== ""));
+	},
+	create : function() {
 		this.inherited(arguments);
 		this.disabledChanged();
+		this.showCaptionChanged();
+		this.showArrowChanged();
+		this.iconChanged();
 	},
-	rendered: function() {
+	rendered : function() {
 		this.inherited(arguments);
 		var select = this.getClientControls()[0];
 
-		if (select) {
+		if(select) {
 			this.changeHandler(select);
 		}
 	},
-	changeHandler: function(sender, event) {
+	changeHandler : function(sender, event) {
+		//if(this.showCaption) {
 		var caption = sender.getControls()[sender.getSelected()].getContent();
 		this.$.innerText.setContent(caption);
+		//}
 	},
-	components: [
-		{kind: "FittableColumns", noStretch: true, classes: "select-decorator-inner", components: [
-			{name: "innerText", fit: true, classes: "select-decorator-inner-text"},
-			{classes: "select-decorator-inner-arrow"}
-		]}
-	]
+	components : [{
+		classes : "select-decorator-inner",
+		components : [ {
+			classes : "select-decorator-inner-arrow"
+		},{
+			name : "innerIcon",
+			classes : "select-decorator-inner-icon"
+		}, {
+			name : "innerText",
+			fit : true,
+			classes : "select-decorator-inner-text"
+		}]
+	}]
 });
