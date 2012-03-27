@@ -29,7 +29,6 @@
 }
 
 .select-decorator-inner-text {
-	/*display: inline-block;*/
 	margin-top: 1px;
 	display: inline-block;
 	white-space: nowrap;
@@ -68,3 +67,4 @@
 .select-decorator-no-arrow .select-decorator-inner-arrow {
 	display: none;
 }
+
