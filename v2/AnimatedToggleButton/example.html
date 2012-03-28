@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+	<title>onyx togglebutton sample</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<script src="../enyojs/enyo/enyo.js" type="text/javascript"></script>
+	<script src="../enyojs/lib/onyx/package.js" type="text/javascript"></script>
+	<script src="package.js"></script>
+
+	<style>
+		.tools > * {
+			margin: 3px;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		new (enyo.kind({
+			name: "App",
+			classes: "enyo-unselectable tools",
+			components: [
+				{kind: "onyx.custom.AnimatedToggleButton", value: true},
+				{tag: "br"},
+				{kind: "onyx.custom.AnimatedToggleButton", onContent: "yes", offContent: "no"},
+				{tag: "br"},
+				{kind: "onyx.custom.AnimatedToggleButton", value: true, onContent: "", offContent: ""},
+				{tag: "br"},
+				{kind: "onyx.custom.AnimatedToggleButton", value: true, style: "background-color: #35A8EE; color: #F1F1F1;"},
+				{tag: "br"},
+				{kind: "onyx.custom.AnimatedToggleButton", value: true, style: "background-color: #C51616; color: #F1F1F1;"},
+				{tag: "br"},
+				{kind: "onyx.custom.AnimatedToggleButton", value: true, disabled: true},
+				{tag: "br"},
+				{kind: "onyx.custom.AnimatedToggleButton", disabled: true}
+			]
+		}))().write();
+	</script>
+</body>
+</html>

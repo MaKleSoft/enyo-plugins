@@ -1,5 +1,5 @@
 enyo.kind({
-	name: "SelectDecorator",
+	name: "onyx.custom.SelectDecorator",
 	classes: "onyx-button select-decorator",
 	handlers: {
 		onchange : "changeHandler"

@@ -2,6 +2,8 @@
 	position: relative;
 	padding: 0px;
 	min-height: 30px;
+	text-align: left;
+	display: inline-block;
 }
 
 .select-decorator select {
@@ -43,7 +45,7 @@
 	width: 32px;
 	height: 32px;
 	background-size: cover;
-	margin: -7px 7px -7px 0;
+	margin: -7px 5px 3px -2px;
 	background-position: 0px 0px;
 }
 
