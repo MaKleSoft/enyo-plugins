@@ -5,14 +5,16 @@ enyo.kind({
 	name: "onyx.custom.AnimatedToggleButton",
 	kind: "onyx.ToggleButton",
 	classes: "onyx-animated-toggle-button",
+	style: "overflow:hidden;",
 	components: [
-		{name: "contentOn", classes: "onyx-toggle-content on"},
-		{name: "contentOff", classes: "onyx-toggle-content off"},
-		{kind: "onyx.Slideable", name: "knob", axis: "h", unit: "px", max: 30, min: 0, overMoving: false,
-			classes: "onyx-toggle-button-knob", ondragfinish: "tap"}
+		{kind: "enyo.Slideable", name: "knob", axis: "h", unit: "px", max: 30, min: 0, overMoving: false,
+			classes: "onyx-toggle-button-knob", ondragfinish: "tap", components:[
+				{name: "contentOn", classes: "onyx-toggle-content on"},
+				{name: "contentOff", classes: "onyx-toggle-content off"},
+			]}
 	],
 	valueChanged: function() {
-		this.inherited(arguments);
+		this.addRemoveClass("off", !this.value);
 		this.calculateSlidingBounds();
 		if (this.value) {
 			this.$.knob.animateToMax();
