@@ -60,9 +60,6 @@ http://www.maklesoft.com
                 if (typeof(data) == "number")
                 return "number";
             }
-			
-03/17/2013 - Diego Torres - Handling row names instead of row numbers.
-			
  */
 enyo.kind({
     name: "maklesoft.DataTable",
@@ -77,7 +74,7 @@ enyo.kind({
         showRowNumbers: false,
         showColumnNames: false,
         columnNames: "ABCDEFGHIJKLMNOPQURSTUVWXYZ".split(""),
-		rowNames : [],
+        rowNames: [],
         cellClass: function(rowIndex, colIndex, data) {
             var className = "maklesoft-datatable-cell";
             if (rowIndex % 2 == 1) {
@@ -137,11 +134,11 @@ enyo.kind({
         if (this.showRowNumbers && this.showColumnNames && row === 0 && col === 0) {
             return;
         } else if (this.showRowNumbers && col === 0) {
-          if(this.rowNames.length > 0){
-            return {content: this.showColumnNames ? this.rowNames[row-1] : this.rowNames[row], className: "maklesoft-datatable-rowname"};
-          }else{
-            return {content: this.showColumnNames ? row-1 : row, className: "maklesoft-datatable-rownumber"};
-          }
+            if (this.rowNames.length > 0) {
+                return {content: this.showColumnNames ? this.rowNames[row-1] : this.rowNames[row], className: "maklesoft-datatable-rowname"};
+            } else {
+                return {content: this.showColumnNames ? row-1 : row, className: "maklesoft-datatable-rownumber"};
+            }
         } else if (this.showColumnNames && row === 0) {
             return {content: this.showRowNumbers ? this.columnNames[col-1] : this.columnNames[col], className: "maklesoft-datatable-colname"};
         } else {
