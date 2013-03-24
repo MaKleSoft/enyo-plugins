@@ -40,6 +40,14 @@ row numbers
 }
 
 /*
+row names
+*/
+.maklesoft-datatable .maklesoft-datatable-rowname {
+    text-align: right;
+    padding : 5px;
+}
+
+/*
 column names
 */
 .maklesoft-datatable .maklesoft-datatable-colname {
